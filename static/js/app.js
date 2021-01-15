@@ -1,4 +1,4 @@
-//working - retrieves only the id names to populate the dropdown list
+//Retrieve the id names to populate the dropdown list
 function dropDownOptions() {
     var dropdownElement = d3.select("#selDataset");
 
@@ -9,8 +9,13 @@ function dropDownOptions() {
         IDnums.forEach(function(name) {
             dropdownElement.append("option").text(name).property("value");
         });
+
+        getDemoData(data.names[0]);
+        buildPlots(data.names[0]);
     });
 }
+
+dropDownOptions();
 
 //Got the demo data. Switched from trying to do a table display to a 'p' tag
 function getDemoData(IDsel) {
@@ -66,7 +71,7 @@ function buildPlots(IDsel) {
         }
 
         //Display the h-bar plot
-        Plotly.plot("bar", hbarData, hbarLayout);
+        Plotly.newPlot("bar", hbarData, hbarLayout);
 
         ////////////////////////////////////////////////////////////////////////////////////////
         //BONUS: WASH FREQ GAUGE
@@ -104,7 +109,7 @@ function buildPlots(IDsel) {
 
         var gaugeLayout = { width: 600, height: 450, margin: {t: 0, b: 0} };
 
-        Plotly.plot("gauge", gaugeData, gaugeLayout);
+        Plotly.newPlot("gauge", gaugeData, gaugeLayout);
 
         ////////////////////////////////////////////////////////////////////////////////////////
         //BUBBLE CHART
@@ -138,7 +143,7 @@ function buildPlots(IDsel) {
             }
         }
 
-        Plotly.plot("bubble", bubbleData, bubbleLayout);
+        Plotly.newPlot("bubble", bubbleData, bubbleLayout);
     });
 }
 
@@ -146,5 +151,3 @@ function optionChanged(IDsel) {
     getDemoData(IDsel);
     buildPlots(IDsel);
 }
-
-dropDownOptions();
